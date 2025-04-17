@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('images/hero-image.svg') }}" alt="Task Management" class="img-fluid">
+                <img src="{{ asset('images/hero-image.png') }}" alt="Task Management" class="img-fluid">
             </div>
         </div>
     </div>

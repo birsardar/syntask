@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TwoFactorAuthController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +44,11 @@ Route::middleware('auth')->group(function () {
 
 // Protected routes (requires auth and 2FA if enabled)
 Route::middleware(['auth', '2fa'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -56,4 +60,9 @@ Route::middleware(['auth', '2fa'])->group(function () {
     Route::get('/profile/2fa', [ProfileController::class, 'show2FA'])->name('profile.2fa');
     Route::post('/profile/2fa', [ProfileController::class, 'toggle2FA'])->name('profile.2fa.toggle');
     Route::post('/profile/2fa/confirm', [ProfileController::class, 'confirm2FA'])->name('profile.2fa.confirm');
+
+    Route::resource('projects', ProjectController::class);
+
+    // Tasks routes
+    Route::resource('tasks', TaskController::class);
 });
